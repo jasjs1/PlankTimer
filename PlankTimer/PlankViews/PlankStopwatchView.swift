@@ -1,3 +1,11 @@
+//
+//  PlankStopwatchView.swift
+//  PlankTimer
+//
+//  Created by Jayce Sagvold on 7/4/23.
+//
+
+
 import SwiftUI
 
 struct LoggedSession: Codable {
@@ -72,7 +80,7 @@ struct PlankStopwatchView: View {
                                 .bold()
                                 .padding()
                                 .foregroundColor(.white)
-                                .background(isRunning ? Color.red : Color.green)
+                                .background(isRunning ? Color.green : Color.green)
                                 .cornerRadius(10)
                         }
 
@@ -84,7 +92,7 @@ struct PlankStopwatchView: View {
                                 .bold()
                                 .padding()
                                 .foregroundColor(.white)
-                                .background(Color.blue)
+                                .background(Color.green)
                                 .cornerRadius(10)
                         }
 
@@ -124,8 +132,16 @@ struct PlankStopwatchView: View {
             }
         }
     }
-
+    
     private func logPlankSession() {
+        if elapsedMinutes == 0 && elapsedTime == 0 {
+            let alert = UIAlertController(title: "Error", message: "The session time is 0:00.00 and cannot be logged.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            UIApplication.shared.windows.first?.rootViewController?.present(alert, animated: true, completion: nil)
+            return
+        }
+
+        // Rest of the code for logging the session
         let sessionDuration = elapsedTime
         let currentDate = Date()
         let session = LoggedSession(duration: sessionDuration, date: currentDate)
@@ -136,6 +152,9 @@ struct PlankStopwatchView: View {
         elapsedMinutes = 0
         isRunning = false
     }
+
+
+
 
     private func formattedDate(_ date: Date) -> String {
         let dateFormatter = DateFormatter()

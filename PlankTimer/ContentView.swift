@@ -1,16 +1,34 @@
 //
-//  ContentView.swift
+//  DailyPlankChallengeView.swift
 //  PlankTimer
 //
-//  Created by Jayce Sagvold on 7/3/23.
+//  Created by Jayce Sagvold on 7/4/23.
 //
 
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            
+        NavigationView {
+            VStack {
+                NavigationLink(destination: PlankStopwatchView()) {
+                    Image("PlankStopWatch-360x360")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(12)
+                        .padding()
+                }
+                
+                Spacer()
+                
+                NavigationLink(destination: PlankStopwatchView()) {
+                    Image("PlankStopWatch-360x360")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(12)
+                        .padding()
+                }
+            }
         }
     }
 }
